@@ -1,4 +1,4 @@
-require_relative "image_finder.rb"
+require_relative "image_fix.rb"
 require "google/cloud/vision"
 require 'googleauth'
 require "google/apis/storage_v1"
@@ -68,10 +68,13 @@ class ImageRecognition
 
     puts "Labels:"
     labels.each do |label|
-      puts label.description
+      puts label
     end
 
   end
+
+
+
 
 end
 
