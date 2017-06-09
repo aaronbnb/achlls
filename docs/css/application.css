@@ -1,23 +1,12 @@
--webkit-animation: image-container 25s ease infinite;
--moz-animation: image-container 25s ease infinite;
-animation: image-container 25s ease infinite;
 
-@-webkit-keyframes image-container {
-    0%{background-position:0% 83%}
-    50%{background-position:100% 18%}
-    100%{background-position:0% 83%}
-}
-@-moz-keyframes image-container {
-    0%{background-position:0% 83%}
-    50%{background-position:100% 18%}
-    100%{background-position:0% 83%}
-}
-@keyframes image-container {
-    0%{background-position:0% 83%}
-    50%{background-position:100% 18%}
-    100%{background-position:0% 83%}
-}
-/*
 div.image-container {
-  background-color;
-}*/
+  min-width: 100%;
+  min-height: 100%;
+  text-align: center;
+  background: linear-gradient(230deg,#a24bcf,#4b79cf,#4bc5cf);
+  background-size: 300% 300%;
+  -webkit-animation: MoveBG 60s ease infinite;
+  -moz-animation: MoveBG 60s ease infinite;
+  -o-animation: MoveBG 60s ease infinite;
+  animation: MoveBG 60s ease infinite;
+}
