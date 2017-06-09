@@ -1,0 +1,23 @@
+/*-webkit-animation: AnimationName 25s ease infinite;
+-moz-animation: AnimationName 25s ease infinite;
+animation: AnimationName 25s ease infinite;
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 83%}
+    50%{background-position:100% 18%}
+    100%{background-position:0% 83%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 83%}
+    50%{background-position:100% 18%}
+    100%{background-position:0% 83%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 83%}
+    50%{background-position:100% 18%}
+    100%{background-position:0% 83%}
+}*/
+
+div.image-container {
+  background-color: black;
+}
