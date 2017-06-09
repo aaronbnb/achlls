@@ -1,4 +1,4 @@
-div, body {
+div, body, head {
   margin: 0px;
   padding: 0px;
 }
@@ -18,7 +18,7 @@ div.image-container {
   animation: MoveBG 60s ease infinite;
 }
 
-@@keyframes MoveBG {
+@keyframes MoveBG {
   0% {
       background-position: 0% 84%;
   }
