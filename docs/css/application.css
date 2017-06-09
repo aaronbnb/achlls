@@ -11,6 +11,14 @@ b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption 
     background: transparent;
 }
 
+h1 {
+  color: #DDDDDD;
+  font-family: sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 5px;
+}
+
 div.image-container {
   display: block;
   color: white;
@@ -28,7 +36,8 @@ div.image-container {
 }
 
 div.images div {
-  padding-top: 20px;
+  padding-top: 15px;
+  padding-bottom: 10px;
 }
 
 @keyframes MoveBG {
