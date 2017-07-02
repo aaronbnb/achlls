@@ -6,6 +6,10 @@ require "google/apis/storage_v1"
 class ImageRecognition
   attr_accessor :labels, :file_name
 
+  def initialize(img_src)
+    @file_name = img_src
+  end
+
   def self.get_scopes_and_authorization
 
     scopes = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/devstorage.read_only']
@@ -51,7 +55,7 @@ class ImageRecognition
 
   end
 
-  def self.detect_labels(img_src)
+  def self.detect_labels
     #do I need this line? -- maybe call it in imageFix constructor
     #ImageRecognition.get_scopes_and_authorization
 
@@ -62,7 +66,7 @@ class ImageRecognition
     vision_project = Google::Cloud::Vision.new project: project_id
 
     # The name of the image file to annotate
-    @file_name = img_src
+    # @file_name = img_src
 
     # Converts image file to a Cloud Vision image, enabling access to
     # full suite of Google Cloud methods
@@ -70,14 +74,18 @@ class ImageRecognition
 
     # Performs label detection on the image file
     @labels = @cloud_vision_image.labels
-
-    activate_optical_character_recognition if text_in_image?
+    binding.pry
+    activate_optical_character_recognition if ImageRecognition.text_in_image?
 
     "Labels:"
     @labels.each do |label|
       puts label.description
     end
 
+  end
+
+  def self.text_in_image?
+    @labels.any? { |label| label.description == 'text' && label.score > 0.7 }
   end
 
   def text_in_image?
