@@ -1,4 +1,4 @@
-require_relative "page_scan.rb"
+require_relative "page_scan"
 require "google/cloud/vision"
 require 'googleauth'
 require "google/apis/storage_v1"
@@ -13,7 +13,7 @@ class ImageRecognition
   def self.get_scopes_and_authorization
 
     scopes = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/devstorage.read_only']
-    authorization = Google::Auth.get_application_default(scopes)
+    authorization = Google::Auth.get_application_default('/Users/aaronfarber/Desktop/achills/credentials.json')
 
     storage = Google::Apis::StorageV1::StorageService.new
     storage.authorization = authorization

@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-require_relative 'image_recognition.rb'
+require_relative 'image_recognition'
 
 class PageScan
   attr_reader :images
@@ -18,8 +18,7 @@ class PageScan
   def detect_image_violations
     violations = 0
     @images.each do |image|
-      violations += 1 unless image.attributes.to_s.include?('alt')
-      #violations += 1 unless image.attributes.key?('alt')
+      violations += 1 unless image.attributes.key?('alt')
       binding.pry
     end
     puts "\nWebpage has #{violations} violations of images without alternative text\n\n"
@@ -32,7 +31,7 @@ class PageScan
   end
 
   def find_images(url)
-    webpage = Nokogiri::HTML.open(url)
+    webpage = Nokogiri::HTML open(url)
     images = webpage.css('img')
     puts "\nWebpage has #{images.length} images\n"
     images
