@@ -1,4 +1,4 @@
-require_relative "image_fix.rb"
+require_relative "page_scan.rb"
 require "google/cloud/vision"
 require 'googleauth'
 require "google/apis/storage_v1"
