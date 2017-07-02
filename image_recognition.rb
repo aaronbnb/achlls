@@ -53,7 +53,7 @@ class ImageRecognition
 
   def self.detect_labels(img_src)
     #do I need this line? -- maybe call it in imageFix constructor
-    ImageRecognition.get_scopes_and_authorization
+    #ImageRecognition.get_scopes_and_authorization
 
     # Your Google Cloud Platform project ID
     project_id = 'accessibility-167719'
@@ -71,10 +71,11 @@ class ImageRecognition
     # Performs label detection on the image file
     @labels = @cloud_vision_image.labels
 
-    binding.pry
+    activate_optical_character_recognition if text_in_image?
+
     "Labels:"
     @labels.each do |label|
-      puts label
+      puts label.description
     end
 
   end
@@ -87,6 +88,7 @@ class ImageRecognition
     #Use OCR on image
     image_text = @cloud_vision_image.text.text
     @parsed_text = eliminate_mid_sentence_newlines(image_text)
+    puts @parsed_text
   end
 
   def eliminate_mid_sentence_newlines(image_text)

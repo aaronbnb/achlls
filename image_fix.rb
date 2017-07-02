@@ -7,6 +7,7 @@ class ImageFix
   attr_reader :images
 
   def initialize(url)
+    ImageRecognition.get_scopes_and_authorization
     @images = find_images url
     image_violations
     generate_alt_text
@@ -17,14 +18,7 @@ class ImageFix
     @images.each do |image|
       violations += 1 unless image.attributes.to_s.include?('alt')
     end
-    puts "\nWebpage has #{violations} violations of images without alternative text\n"
-  end
-
-  def debug
-    ImageFix.methods
-    y = 10
-    binding.pry
-
+    puts "\nWebpage has #{violations} violations of images without alternative text\n\n"
   end
 
   def print_raw_images
