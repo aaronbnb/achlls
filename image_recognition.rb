@@ -4,6 +4,7 @@ require 'googleauth'
 require "google/apis/storage_v1"
 
 class ImageRecognition
+  attr_accessor :labels, :file_name
 
   def self.get_scopes_and_authorization
 
@@ -51,30 +52,46 @@ class ImageRecognition
   end
 
   def self.detect_labels(img_src)
-
+    #do I need this line? -- maybe call it in imageFix constructor
     ImageRecognition.get_scopes_and_authorization
 
     # Your Google Cloud Platform project ID
     project_id = 'accessibility-167719'
-    #project_id = '2e03176f6932eb9ce9318d5449e167d772f94a3a'
-    # Instantiates a client
-    vision = Google::Cloud::Vision.new project: project_id
+
+    # Instantiates a client, create a Google::Cloud::Vision::Project
+    vision_project = Google::Cloud::Vision.new project: project_id
 
     # The name of the image file to annotate
-    file_name = img_src
+    @file_name = img_src
+
+    # Converts image file to a Cloud Vision image, enabling access to
+    # full suite of Google Cloud methods
+    @cloud_vision_image = vision_project.image(@file_name)
 
     # Performs label detection on the image file
-    labels = vision.image(file_name).labels
+    @labels = @cloud_vision_image.labels
 
-    puts "Labels:"
-    labels.each do |label|
+    binding.pry
+    "Labels:"
+    @labels.each do |label|
       puts label
     end
 
   end
 
+  def text_in_image?
+    @labels.any? { |label| label.description == 'text' && label.score > 0.7 }
+  end
 
+  def activate_optical_character_recognition
+    #Use OCR on image
+    image_text = @cloud_vision_image.text.text
+    @parsed_text = eliminate_mid_sentence_newlines(image_text)
+  end
 
+  def eliminate_mid_sentence_newlines(image_text)
+    image_text.gsub(/\n[a-z]/) { |old_text| " " + old_text[1] }
+  end
 
 end
 

@@ -20,6 +20,13 @@ class ImageFix
     puts "\nWebpage has #{violations} violations of images without alternative text\n"
   end
 
+  def debug
+    ImageFix.methods
+    y = 10
+    binding.pry
+
+  end
+
   def print_raw_images
     puts "\n"
     puts @images
