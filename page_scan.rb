@@ -18,8 +18,7 @@ class PageScan
   def detect_image_violations
     violations = 0
     @images.each do |image|
-      violations += 1 unless image.attributes.key?('alt')
-      binding.pry
+      violations += 1 unless image.attributes['alt']
     end
     puts "\nWebpage has #{violations} violations of images without alternative text\n\n"
   end

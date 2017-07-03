@@ -7,6 +7,8 @@ class ImageRecognition
   attr_accessor :labels, :file_name
 
   def initialize(img_src)
+    # The name of the image file to annotate
+    # @file_name = img_src
     @file_name = img_src
   end
 
@@ -63,14 +65,13 @@ class ImageRecognition
     project_id = 'accessibility-167719'
 
     # Instantiates a client, create a Google::Cloud::Vision::Project
-    vision_project = Google::Cloud::Vision.new project: project_id
+    vision = Google::Cloud::Vision.new project: project_id
 
-    # The name of the image file to annotate
-    # @file_name = img_src
+
 
     # Converts image file to a Cloud Vision image, enabling access to
     # full suite of Google Cloud methods
-    @cloud_vision_image = vision_project.image(@file_name)
+    @cloud_vision_image = vision.image(@file_name)
 
     # Performs label detection on the image file
     @labels = @cloud_vision_image.labels
