@@ -33,9 +33,10 @@ class PageScan
   end
 
   def compress_images
-    #Image files sent to the Google Cloud Vision API should not exceed 4 MB
-    #Batch the images
-    #much faster but less accurate with compressed images
+    # Image files sent to the Google Cloud Vision API should not exceed 4 MB
+    # Batch the images
+    # Preprocess such images to reduce them to a more reasonable image size,
+    # while also downsampling them to a reasonable file size.
   end
 
   def process_images
@@ -48,7 +49,7 @@ class PageScan
   end
 
   def get_img_src(image)
-    image.attributes['src'].value
+    image.attributes['src'].value.strip
   end
 
 end
