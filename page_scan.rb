@@ -11,8 +11,7 @@ class PageScan
 
     @images = find_images(url)
     detect_image_violations
-    generate_alternative_text
-    @repaired_images
+    process_images
   end
 
   def detect_image_violations
@@ -20,13 +19,10 @@ class PageScan
     @images.each do |image|
       violations += 1 unless image.attributes['alt']
     end
-    puts "\nWebpage has #{violations} violations of images without alternative text\n\n"
-  end
 
-  def print_raw_images
-    puts "\n"
-    puts @images
-    puts "\n"
+    puts "\nWebpage has #{violations} violations of images
+    without alternative text\n\n"
+
   end
 
   def find_images(url)
@@ -36,12 +32,12 @@ class PageScan
     images
   end
 
-  def generate_alternative_text
+  def process_images
     @images.each_with_index do |image, i|
       img_src = get_img_src(image)
       puts "Image #{i}"
       puts img_src
-      ImageRecognition.detect_labels(img_src)
+      ImageRecognition.new(img_src)
     end
   end
 
