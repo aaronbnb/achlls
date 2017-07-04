@@ -4,7 +4,7 @@ require 'open-uri'
 require_relative 'image_recognition'
 
 class PageScan
-  attr_reader :images
+  attr_accessor :images
 
   def initialize(url)
     ImageRecognition.get_scopes_and_authorization
