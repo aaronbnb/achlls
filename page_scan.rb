@@ -32,6 +32,12 @@ class PageScan
     images
   end
 
+  def compress_images
+    #Image files sent to the Google Cloud Vision API should not exceed 4 MB
+    #Batch the images
+    #much faster but less accurate with compressed images
+  end
+
   def process_images
     @images.each_with_index do |image, i|
       img_src = get_img_src(image)
