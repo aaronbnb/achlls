@@ -50,6 +50,7 @@ class PageScan
 
   def get_img_src(image)
     image.attributes['src'].value.strip
+    #check if valid url
   end
 
 end
