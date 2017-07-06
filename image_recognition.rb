@@ -21,7 +21,7 @@ class ImageRecognition
     @labels = broadly_categorize_image
 
     decision_depot
-
+    binding.pry
     puts @alternative_text
   end
 
