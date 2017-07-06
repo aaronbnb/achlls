@@ -4,19 +4,19 @@ require 'open-uri'
 require_relative 'image_recognition'
 
 class PageScan
-  attr_accessor :images
+  attr_accessor :original_images, :repaired_images
 
   def initialize(url)
     ImageRecognition.get_scopes_and_authorization
 
-    @images = find_images(url)
+    @original_images = find_images(url)
     detect_image_violations
-    process_images
+    @repaired_images = process_images
   end
 
   def detect_image_violations
     violations = 0
-    @images.each do |image|
+    @original_images.each do |image|
       violations += 1 unless image.attributes['alt']
     end
 
@@ -42,9 +42,10 @@ class PageScan
   end
 
   def process_images
-    @images.each_with_index do |image, i|
+    i = 1
+    @original_images.map do |image|
       img_src = get_img_src(image)
-      puts "Image #{i}"
+      puts "Image #{i += 1}"
       puts img_src
       ImageRecognition.new(img_src)
     end

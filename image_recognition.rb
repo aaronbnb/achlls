@@ -21,8 +21,6 @@ class ImageRecognition
     @labels = broadly_categorize_image
 
     decision_depot
-    binding.pry
-    puts @alternative_text
   end
 
   def self.get_scopes_and_authorization
@@ -104,7 +102,7 @@ class ImageRecognition
   end
 
   def image_description
-     "Labels include " + @labels.map(&:description).join(" ")
+    "Labels include " + @labels.map(&:description).join(" ")
   end
 
 end
