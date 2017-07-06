@@ -3,6 +3,9 @@ require 'nokogiri'
 require 'open-uri'
 require_relative 'image_recognition'
 
+require "tinify"
+Tinify.key = "Gyu3sNUGM1GOw513yneGDEd2ApvW39hd"
+
 class PageScan
   attr_accessor :original_images, :repaired_images
 
@@ -10,19 +13,18 @@ class PageScan
     ImageRecognition.get_scopes_and_authorization
 
     @original_images = find_images(url)
-    detect_image_violations
+    @violations = detect_image_violations
+    display_violations
     @repaired_images = process_images
   end
 
   def detect_image_violations
-    violations = 0
-    @original_images.each do |image|
-      violations += 1 unless image.attributes['alt']
-    end
+    @original_images.count { |image| !image.attributes['alt'] }
+  end
 
+  def display_violations
     puts "\nWebpage has #{violations} violations of images
     without alternative text\n\n"
-
   end
 
   def find_images(url)
@@ -34,7 +36,7 @@ class PageScan
 
   def compress_images
 
-
+    Tinify.from_url("https://cdn.tinypng.com/images/panda-happy.png")
     # Image files sent to the Google Cloud Vision API should not exceed 4 MB
     # Batch the images
     # Preprocess such images to reduce them to a more reasonable image size,
@@ -42,7 +44,7 @@ class PageScan
   end
 
   def process_images
-    i = 1
+    i = 0
     @original_images.map do |image|
       img_src = get_img_src(image)
       puts "Image #{i += 1}"
