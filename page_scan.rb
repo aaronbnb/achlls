@@ -7,12 +7,14 @@ require "tinify"
 Tinify.key = "Gyu3sNUGM1GOw513yneGDEd2ApvW39hd"
 
 class PageScan
-  attr_accessor :original_images, :repaired_images
+  attr_accessor :original_images, :repaired_images, :url
+  attr_reader :violations
 
   def initialize(url)
+    @url = url
     ImageRecognition.get_scopes_and_authorization
-
-    @original_images = find_images(url)
+    @time = Time.now
+    @original_images = find_images
     @violations = detect_image_violations
     display_violations
     @repaired_images = process_images
@@ -27,20 +29,24 @@ class PageScan
     without alternative text\n\n"
   end
 
-  def find_images(url)
-    webpage = Nokogiri::HTML open(url)
+  def timer
+
+  end
+
+  def find_images
+    webpage = Nokogiri::HTML open(@url)
     images = webpage.css('img')
     puts "\nWebpage has #{images.length} images\n"
     images
   end
 
-  def compress_images
-
-    Tinify.from_url("https://cdn.tinypng.com/images/panda-happy.png")
+  def compress_image(img_src)
     # Image files sent to the Google Cloud Vision API should not exceed 4 MB
-    # Batch the images
     # Preprocess such images to reduce them to a more reasonable image size,
     # while also downsampling them to a reasonable file size.
+
+    compressed_img = Tinify.from_url(img_src)
+    compressed_img.to_file
   end
 
   def process_images

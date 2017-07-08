@@ -33,34 +33,6 @@ class ImageRecognition
 
   end
 
-  def self.detect_labels(img_src)
-    #do I need this line? -- maybe call it in imageFix constructor
-    #ImageRecognition.get_scopes_and_authorization
-
-    # Your Google Cloud Platform project ID
-    project_id = 'accessibility-167719'
-
-    # Instantiates a client, create a Google::Cloud::Vision::Project
-    vision = Google::Cloud::Vision.new project: PROJECT_ID
-
-    @file_name = img_src
-
-    # Converts image file to a Cloud Vision image, :enabling access to
-    # full suite of Google Cloud methods
-    @cloud_vision_image = vision.image(@file_name)
-
-    # Performs label detection on the image file
-    @labels = @cloud_vision_image.labels
-
-    binding.pry
-
-    "Labels:"
-    @labels.each do |label|
-      puts label.description
-    end
-
-  end
-
   def create_project
     # Instantiates a client, create a Google::Cloud::Vision::Project
     cloud_vision = Google::Cloud::Vision.new project: PROJECT_ID
@@ -73,7 +45,15 @@ class ImageRecognition
   def broadly_categorize_image
     # Performs label detection on the image file, broadly categorizing
     # image properties for further, targeted recognition
-    @vision.labels
+    count = 0
+    @vision.labels.each do |label|
+      { count:
+        {
+          description: label.description,
+          score: label.score
+        }
+      }
+    end
   end
 
   def decision_depot
@@ -115,11 +95,9 @@ if __FILE__ == $PROGRAM_NAME
     PageScan.new(url)
   else
     puts <<-usage
-    Usage: ruby detect_text.rb [image file path]
-    Example:
-    ruby detect_text.rb image.png
-    ruby detect_text.rb https://public-url/image.png
-    ruby detect_text.rb gs://my-bucket/image.png
+    Usage:
+    PageScan.new(url string)
+    or load 'image_recognition.rb' then img_src
     usage
   end
 end
