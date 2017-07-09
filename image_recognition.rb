@@ -46,14 +46,11 @@ class ImageRecognition
     # Performs label detection on the image file, broadly categorizing
     # image properties for further, targeted recognition
     count = 0
+    labels = {}
     @vision.labels.each do |label|
-      { count:
-        {
-          description: label.description,
-          score: label.score
-        }
-      }
+      labels[label.description] = label.score
     end
+    labels
   end
 
   def decision_depot
@@ -63,7 +60,9 @@ class ImageRecognition
   end
 
   def text_in_image?
-    @labels.any? { |label| label.description == 'text' && label.score > 0.7 }
+    binding.pry
+    # 
+    @labels.keys.any? { |label| label == 'text' && @labels[label] > 0.7 }
   end
 
   def activate_optical_character_recognition
