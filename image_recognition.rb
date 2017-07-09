@@ -61,7 +61,7 @@ class ImageRecognition
 
   def text_in_image?
     binding.pry
-    # 
+    # Provides alt text for image
     @labels.keys.any? { |label| label == 'text' && @labels[label] > 0.7 }
   end
 
