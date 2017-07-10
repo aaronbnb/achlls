@@ -42,10 +42,10 @@ class PageScan
   end
 
   def display_duration_stats
-    program_duration = @finish.strftime('%L') - @start.strftime('%L')
-    average_image_time = program_duration / @original_images
+    program_duration = @finish - @start
+    average_image_time = program_duration / @original_images.count
 
-    puts "Full page scan and image recogntion took #{duration}"
+    puts "Full page scan and image recogntion took #{program_duration}"
 
     puts "Average Time for each Image Recognition
     instance: #{average_image_time}"
