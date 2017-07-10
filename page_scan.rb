@@ -11,13 +11,25 @@ class PageScan
   attr_reader :violations
 
   def initialize(url)
-    @url = url
+    start_timer
+
     ImageRecognition.get_scopes_and_authorization
-    @time = Time.now
+    @url = url
     @original_images = find_images
     @violations = detect_image_violations
     display_violations
     @repaired_images = process_images
+
+    stop_timer
+    display_duration_stats
+  end
+
+  def start_timer
+    @start = Time.now
+  end
+
+  def stop_timer
+    @finish = Time.now
   end
 
   def detect_image_violations
@@ -29,8 +41,14 @@ class PageScan
     without alternative text\n\n"
   end
 
-  def timer
+  def display_duration_stats
+    program_duration = @finish.strftime('%L') - @start.strftime('%L')
+    average_image_time = program_duration / @original_images
 
+    puts "Full page scan and image recogntion took #{duration}"
+
+    puts "Average Time for each Image Recognition
+    instance: #{average_image_time}"
   end
 
   def find_images

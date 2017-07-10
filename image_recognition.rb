@@ -60,9 +60,11 @@ class ImageRecognition
   end
 
   def text_in_image?
-    binding.pry
     # Provides alt text for image
-    @labels.keys.any? { |label| label == 'text' && @labels[label] > 0.7 }
+    # Tests whether there is text in hash, whether has (confidence) score
+    # greater than 0.70, and makes sure it's not a false positive i.e.
+    # an 'X' logo to close window
+    @labels['text'] && @labels['text'] > 0.7 && @vision.text
   end
 
   def activate_optical_character_recognition
@@ -81,7 +83,7 @@ class ImageRecognition
   end
 
   def image_description
-    "Labels include " + @labels.map(&:description).join(" ")
+    "Labels include " + @labels.keys.join(' ')
   end
 
 end
