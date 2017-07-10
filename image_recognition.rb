@@ -13,6 +13,7 @@ class ImageRecognition
   def initialize(img_src)
     # The name of the image file to annotate
     # can provide HTTP/HTTPS URL or add as Google Cloud Storage URI
+    # Compress image (if image needs to be compressed) at this point
     @alternative_text = ""
     @file_name = img_src
 
