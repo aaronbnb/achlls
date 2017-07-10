@@ -26,6 +26,12 @@ gem 'coffee-rails', '~> 4.2'
 # gem for image compression, TinyPNG
 gem "tinify"
 
+# gem for Rails console to debug
+gem 'pry-rails'
+
+# gem for HTML, XML parser
+gem 'nokogiri', '~> 1.7'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
