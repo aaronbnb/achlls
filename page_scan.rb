@@ -4,11 +4,13 @@ require 'open-uri'
 require_relative 'image_recognition'
 
 require "tinify"
-Tinify.key = "Gyu3sNUGM1GOw513yneGDEd2ApvW39hd"
+
 
 class PageScan
   attr_accessor :original_images, :repaired_images, :url
   attr_reader :violations
+
+  COMPRESSION_KEY ||= "Gyu3sNUGM1GOw513yneGDEd2ApvW39hd".freeze
 
   def initialize(url)
     start_timer
