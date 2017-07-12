@@ -7,8 +7,6 @@ class ImageRecognition
   attr_accessor :labels, :file_name, :vision, :alternative_text
   # Google Cloud Platform project ID
   PROJECT_ID ||= 'accessibility-167719'.freeze
-  # Logical OR operation (lazy assignment) to remove 'already
-  # initalized constant' warning
 
   def initialize(img_src)
     # The name of the image file to annotate
