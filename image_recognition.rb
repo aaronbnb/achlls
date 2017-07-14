@@ -12,6 +12,7 @@ class ImageRecognition
     # The name of the image file to annotate
     # can provide HTTP/HTTPS URL or add as Google Cloud Storage URI
     # Compress image (if image needs to be compressed) at this point
+    start = Time.now
     @alternative_text = ""
     @file_name = img_src
 
@@ -20,6 +21,8 @@ class ImageRecognition
     @labels = broadly_categorize_image
 
     decision_depot
+    finish = Time.now
+    @duration = finish - start
   end
 
   def self.get_scopes_and_authorization
