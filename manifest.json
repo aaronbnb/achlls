@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+
+  "name": "achlls",
+  "author": "aaronbnb",
+  "contributors": [{
+    "name": "chrabyrd"
+    },
+    {
+    "name": "Makewell77"
+    }
+  ],
+  "description": "This extension shows a Google Image search result for the current page",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "docs/assets/icon.png",
+    "default_popup": "docs/popup.html"
+  },
+  "content_scripts": [{
+   "js": ["./manipulate.js"],
+   "css": ["./replacement-styles.css"],
+   "matches": ["https://*/*"]
+ }],
+ "web_accessible_resources": [
+    "docs/assets/icon.png",
+    "docs/assets/black.png"
+  ],
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "clipboardRead",
+    "pageCapture"
+  ]
+}
