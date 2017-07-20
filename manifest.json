@@ -10,7 +10,7 @@
     "name": "Makewell77"
     }
   ],
-  "description": "This extension shows a Google Image search result for the current page",
+  "description": "Generates alternative text for webpage images",
   "version": "1.0",
 
   "browser_action": {
