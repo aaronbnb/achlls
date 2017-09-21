@@ -19,4 +19,4 @@ text attribute. If the image already has an alternative text attribute, the prog
 
 ## Future Features
 
-This program could use some logic to correct other similar issues around images such as the description being put into a <figcaption> which is not accessible to screen readers.
+This program could use some logic to correct other similar issues around images such as the description being put into a `<figcaption>` which is not accessible to screen readers.
