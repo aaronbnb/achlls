@@ -29,13 +29,6 @@ class PageScan
     display_duration_stats
   end
 
-  def start_timer
-    @start = Time.now
-  end
-
-  def stop_timer
-    @finish = Time.now
-  end
 
   def compression
     compression_start = Time.now
@@ -87,14 +80,8 @@ class PageScan
     images
   end
 
-  def process_images
-    i = 0
-   @original_images.map do |image|
-     img_src = get_img_src(image)
-     puts "Image #{i += 1}"
-     puts img_src
-     ImageRecognition.new(img_src)
-   end
+  def repair_original_alt_text (image)
+
   end
 
   def compress_images
@@ -118,6 +105,16 @@ class PageScan
 
   end
 
+  def process_images
+    i = 0
+    @original_images.map do |image|
+      img_src = get_img_src(image)
+      puts "Image #{i += 1}"
+      puts img_src
+      ImageRecognition.new(img_src)
+    end
+  end
+
   def process_compressed_images
     i = 0
     @compressed_images.map do |compressed_img_src|
@@ -131,6 +128,14 @@ class PageScan
       # we've previously analzyed an image
       ImageRecognition.new(compressed_img_src)
     end
+  end
+
+  def start_timer
+    @start = Time.now
+  end
+
+  def stop_timer
+    @finish = Time.now
   end
 
   def get_img_src(image)

@@ -57,7 +57,6 @@ class ImageRecognition
 
   def decision_depot
     activate_optical_character_recognition if text_in_image?
-
     @alternative_text += image_description
   end
 
@@ -75,6 +74,42 @@ class ImageRecognition
     parsed_text = eliminate_mid_sentence_newlines(image_text)
     @alternative_text = alt_text_preface(parsed_text)
   end
+
+
+
+
+
+
+
+
+
+  def original_alt_text(image)
+    image.attributes['alt'].value.strip
+  end
+
+  def repair_original_alt_text
+    @alt_text.gsub(/[-_]+/, " ").strip
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def eliminate_mid_sentence_newlines(image_text)
     image_text.gsub(/\n[a-z]/) { |old_text| " " + old_text[1] }
