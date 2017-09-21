@@ -6,7 +6,7 @@ readers such as JAWS. We hope to grow this project into a sustainable business t
 Internet accessible. Our goal is to create a product which can 'overlay' accessibility on a completed site rather than have to integrate accessibility at its ground floor, which is a challenge for developers.
 
 
-Please check out our [pitch deck](https://docs.google.com/presentation/d/1-NNViQdq4lbtc3Hd14aycO45S8lDwwa2zBHbB80R30s/edit?usp=sharing). For 10k, we can make this into a company.
+Please check out our [pitch deck](https://docs.google.com/presentation/d/1-NNViQdq4lbtc3Hd14aycO45S8lDwwa2zBHbB80R30s/edit?usp=sharing). For 20k, we can make this into a company.
 
 The program uses Ruby's Nokogiri gem to parse the HTML, grabbing the
 images on the webpages. The images are then encoded base-64 and uploaded to
